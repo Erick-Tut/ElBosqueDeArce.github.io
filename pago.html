@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pago - El Bosque de Arce</title>
+  <link rel="stylesheet" href="style4.css">
+</head>
+
+<body>
+
+  <!-- Fondo de video para la página en buclé -->
+  <div class="video-background">
+    <video autoplay muted loop>
+      <source
+        src="https://cdn.akamai.steamstatic.com/steamcommunity/public/images/items/1465660/6f0c3c0d89b37e1d0fbdd805f114eb359dc0e539.webm"
+        type="video/webm">
+      Tu navegador no soporta el elemento de video.
+    </video>
+  </div>
+
+  <!-- Cabecera de la página con el menú de navegación -->
+  <header>
+    <h1>Pagar - El Bosque de Arce</h1>
+    <nav>
+      <div class="tabs">
+        <a href="main.html" class="tab">Inicio</a>
+        <a href="ventas.html" class="tab">Ventas</a>
+        <a href="perfil.html" class="tab">Perfil</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Formulario de Pago -->
+  <div class="container" id="payment-container">
+    <h3>Formulario de Pago</h3>
+    <form id="payment-form">
+      <label for="card-number">Número de Tarjeta:</label>
+      <input type="text" id="card-number" class="input-field" placeholder="0000 0000 0000 0000" maxlength="19" required>
+
+      <label for="expiry-date">Fecha de Expiración:</label>
+      <input type="text" id="expiry-date" class="input-field" placeholder="MM/YY" maxlength="5" required>
+
+      <label for="cvv">CVV:</label>
+      <input type="text" id="cvv" class="input-field" placeholder="000" maxlength="3" pattern="\d{3}" required>
+
+      <label for="name">Nombre en la Tarjeta:</label>
+      <input type="text" id="name" class="input-field" placeholder="Nombre Apellido" required>
+
+      <label for="ticket-type">Tipo de Ticket:</label>
+      <select id="ticket-type" required class="input-field">
+        <option value="Básico">Básico</option>
+        <option value="Intermedio">Intermedio</option>
+        <option value="Avanzado">Avanzado</option>
+        <option value="Premium">Premium</option>
+      </select>
+
+      <label for="ticket-quantity">Cantidad:</label>
+      <input type="number" id="ticket-quantity" class="input-field" min="1" value="1" required>
+
+      <button type="button" id="purchase-button" class="btn">Comprar</button>
+    </form>
+  </div>
+
+  <!-- Mensaje que se muestra si el usuario no está logueado -->
+  <div class="no-account-message" id="no-account-message">
+    <h3>No tienes una cuenta</h3>
+    <p>Ingresa a una cuenta para continuar.</p>
+    <a href="login.html" class="button">Iniciar sesión</a>
+  </div>
+
+  <!-- Contenedor overlay para calificación y mensaje de pago exitoso -->
+  <div id="container-overlay" class="container-overlay">
+    <div id="notification" class="notification-box">
+      <p>Pago Exitoso!</p>
+    </div>
+    <div id="rating-form" class="rating-form">
+      <p>¡Calificanos!</p>
+      <div id="rating-stars" class="rating-stars">
+        <span class="star" data-value="1">&#9733;</span>
+        <span class="star" data-value="2">&#9733;</span>
+        <span class="star" data-value="3">&#9733;</span>
+        <span class="star" data-value="4">&#9733;</span>
+        <span class="star" data-value="5">&#9733;</span>
+      </div>
+      <input type="text" class="input-field" id="comment" placeholder="Deja tu comentario">
+      <button type="button" id="submit-rating" class="btn">Enviar</button>
+    </div>
+  </div>
+
+  <!-- Pie de página con información del autor y del curso -->
+  <footer class="footer-section">
+    <div class="footer-info">
+      <p>Erick Carlos Omar Tut</p>
+      <p>5to Bachillerato en Computación - Gamma</p>
+    </div>
+    <div class="footer-info">
+      <p>Programación II</p>
+      <p>Helmut Icó</p>
+    </div>
+    <div class="footer-image">
+      <img src="Imagenes/Bressa.png" alt="Bressani">
+    </div>
+  </footer>
+
+  <!-- Script para manejar la visibilidad del formulario de pago según el estado de inicio de sesión del usuario -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const currentUser = localStorage.getItem('currentUser');
+      const paymentContainer = document.getElementById('payment-container');
+      const containerOverlay = document.getElementById('container-overlay');
+      const notification = document.getElementById('notification');
+      const ratingForm = document.getElementById('rating-form');
+      const stars = document.querySelectorAll('#rating-stars .star');
+
+      let selectedRating = 0;
+
+      if (currentUser) {
+        paymentContainer.style.display = 'block';
+        containerOverlay.style.display = 'none'; // Asegúrate de ocultar el overlay al inicio
+      } else {
+        paymentContainer.style.display = 'none';
+        alert('Debes iniciar sesión para realizar una compra.');
+        window.location.href = 'login.html';
+      }
+
+      function formatCardNumber(event) {
+        const input = event.target;
+        let value = input.value.replace(/\D/g, '');
+        value = value.match(/.{1,4}/g);
+        input.value = value ? value.join(' ') : '';
+      }
+
+      function formatExpiryDate(event) {
+        const input = event.target;
+        let value = input.value.replace(/\D/g, '');
+        if (value.length > 2) {
+          value = value.slice(0, 2) + '/' + value.slice(2, 4);
+        }
+        input.value = value;
+      }
+
+      function validateForm() {
+        const cardNumber = document.getElementById('card-number').value.trim();
+        const expiryDate = document.getElementById('expiry-date').value.trim();
+        const cvv = document.getElementById('cvv').value.trim();
+        const name = document.getElementById('name').value.trim();
+        const ticketType = document.getElementById('ticket-type').value;
+        const ticketQuantity = document.getElementById('ticket-quantity').value;
+
+        if (!cardNumber || !expiryDate || !cvv || !name || !ticketType || !ticketQuantity) {
+          alert('Por favor, rellena el formulario correctamente.');
+          return false;
+        }
+
+        return true;
+      }
+
+      function completePurchase() {
+        if (!currentUser) {
+          alert('Debes iniciar sesión para realizar una compra.');
+          window.location.href = 'login.html';
+          return;
+        }
+
+        let ticketCounter = parseInt(localStorage.getItem('globalCounter')) || 1;
+        const quantity = parseInt(document.getElementById('ticket-quantity').value);
+        const ticketType = document.getElementById('ticket-type').value;
+
+        const ticketImages = {
+          'Básico': 'Imagenes/Basic.png',
+          'Intermedio': 'Imagenes/Intermedium.png',
+          'Avanzado': 'Imagenes\Advandced.png',
+          'Premium': 'Imagenes/Premium.png'
+        };
+
+        const user = JSON.parse(currentUser);
+        let userTickets = user.tickets || [];
+
+        for (let i = 0; i < quantity; i++) {
+          ticketCounter++;
+          const newTicket = {
+            id: ticketCounter,
+            type: ticketType,
+            image: ticketImages[ticketType]
+          };
+          userTickets.push(newTicket);
+        }
+
+        user.tickets = userTickets;
+        localStorage.setItem('globalCounter', ticketCounter);
+        localStorage.setItem('currentUser', JSON.stringify(user));
+
+        // Mostrar notificación de pago exitoso
+        paymentContainer.style.display = 'none';
+        containerOverlay.style.display = 'flex';
+        setTimeout(() => {
+          notification.style.display = 'none';
+          ratingForm.style.display = 'block';
+        }, 2000); // Espera 2 segundos para mostrar el formulario de calificación
+      }
+
+      document.getElementById('card-number').addEventListener('input', formatCardNumber);
+      document.getElementById('expiry-date').addEventListener('input', formatExpiryDate);
+
+      document.getElementById('purchase-button').addEventListener('click', function () {
+        if (validateForm()) {
+          completePurchase();
+        }
+      });
+
+      stars.forEach(star => {
+        star.addEventListener('mouseover', function () {
+          const value = parseInt(this.getAttribute('data-value'));
+          stars.forEach(s => {
+            const starValue = parseInt(s.getAttribute('data-value'));
+            s.classList.toggle('hover', starValue <= value);
+          });
+        });
+
+        star.addEventListener('mouseout', function () {
+          stars.forEach(s => {
+            s.classList.remove('hover');
+          });
+        });
+
+        star.addEventListener('click', function () {
+          selectedRating = parseInt(this.getAttribute('data-value'));
+          stars.forEach(s => {
+            const value = parseInt(s.getAttribute('data-value'));
+            s.classList.toggle('selected', value <= selectedRating);
+          });
+        });
+      });
+
+      document.getElementById('submit-rating').addEventListener('click', function () {
+        const comment = document.getElementById('comment').value;
+        if (selectedRating === 0) {
+          alert('Por favor, selecciona una calificación.');
+          return;
+        }
+        if (comment.trim() === '') {
+          alert('Por favor, deja un comentario.');
+          return;
+        }
+
+        // Aquí puedes manejar el comentario y la calificación como desees
+        alert(`¡Gracias por tu calificación de ${selectedRating} estrellas y comentario!`);
+
+        // Limpiar el comentario y ocultar el formulario de calificación
+        document.getElementById('comment').value = '';
+        setTimeout(() => {
+          window.location.href = 'perfil.html';
+        }, 1000); // Espera 1 segundo antes de redirigir
+      });
+    });
+  </script>
+
+</body>
+
+</html>

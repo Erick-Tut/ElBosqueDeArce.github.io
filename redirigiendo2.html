@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirigiendo...</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Vincula la hoja de estilos -->
+</head>
+
+<body>
+  <!-- Video de fondo que se reproduce en bucle -->
+  <div class="video-background">
+    <video autoplay muted loop>
+      <source
+        src="https://cdn.akamai.steamstatic.com/steamcommunity/public/images/items/1465660/6f0c3c0d89b37e1d0fbdd805f114eb359dc0e539.webm"
+        type="video/webm">
+      Tu navegador no soporta el elemento de video.
+    </video>
+  </div>
+
+  <!-- Contenedor principal con mensaje de redirección y loader -->
+  <div class="container">
+    <h1>Redirigiendo...</h1>
+    <!-- Indicador de carga -->
+    <div class="loader"></div>
+  </div>
+
+  <script>
+    // Redirige después de 3 segundos
+    setTimeout(function () {
+      // Obtén el parámetro de URL 'redirect'
+      const urlParams = new URLSearchParams(window.location.search);
+      const redirectTo = urlParams.get('redirect');
+
+      // Redirige a la URL especificada en el parámetro 'redirect' o a 'index.html' si no se especifica
+      window.location.href = redirectTo || 'index.html';
+    }, 3000);
+  </script>
+</body>
+
+</html>

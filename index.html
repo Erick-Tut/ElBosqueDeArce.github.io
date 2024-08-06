@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acceso</title>
+  <!-- Enlace al archivo CSS para el estilo -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Contenedor del video de fondo -->
+  <div class="video-background">
+    <video autoplay muted loop>
+      <!-- Fuente del video de fondo -->
+      <source
+        src="https://cdn.akamai.steamstatic.com/steamcommunity/public/images/items/1465660/6f0c3c0d89b37e1d0fbdd805f114eb359dc0e539.webm"
+        type="video/mp4">
+      <!-- Mensaje alternativo si el navegador no soporta video -->
+      Tu navegador no soporta el elemento de video.
+    </video>
+  </div>
+
+  <header>
+    <!-- Título principal de la página -->
+    <h1>Bienvenido al Bosque de Arce</h1>
+  </header>
+
+  <!-- Contenedor del formulario de acceso -->
+  <div class="container">
+    <h4>Acceso</h4>
+    <form>
+      <!-- Campo de entrada para el nombre de usuario -->
+      <h5>Usuario</h5>
+      <input type="text" id="usuarios" class="input-field" required>
+
+      <!-- Campo de entrada para la contraseña -->
+      <h5>Contraseña</h5>
+      <input type="password" id="clave" class="input-field" required>
+      <br><br>
+      <!-- Botón de confirmación -->
+      <input type="button" value="Confirmar" class="btn" onclick="verificar()">
+    </form>
+  </div>
+
+  <!-- Sección del pie de página con información adicional -->
+  <div class="footer-section">
+    <div class="footer-info">
+      <!-- Información del estudiante -->
+      <p>Erick Carlos Omar Tut</p>
+      <p>5to Bachillerato en Computación - Gamma</p>
+    </div>
+    <div class="footer-info">
+      <!-- Información del curso y profesor -->
+      <p>Programación II</p>
+      <p>Helmut Icó</p>
+    </div>
+    <div class="footer-image">
+      <!-- Imagen de la institución -->
+      <img src="Imagenes/Bressa.png" alt="Bressani">
+    </div>
+  </div>
+
+  <!-- Script para la verificación de la contraseña -->
+  <script>
+    let control = 0; // Variable no utilizada en este script
+    let contraseña = 'pass'; // Contraseña predefinida
+
+    function verificar() {
+      let clave = document.getElementById('clave').value;
+      // Comprobación de la contraseña
+      if (clave != contraseña) {
+        alert('La contraseña es incorrecta');
+      } else {
+        // Redirección en caso de contraseña correcta
+        window.location.href = "redirigiendo.html";
+      }
+    }
+  </script>
+</body>
+
+</html>

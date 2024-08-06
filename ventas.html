@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ventas - El Bosque de Arce</title>
+  <link rel="stylesheet" href="styles2.css">
+</head>
+
+<body>
+  <!-- Fondo de video para la página -->
+  <div class="video-background">
+    <video autoplay muted loop>
+      <source
+        src="https://cdn.akamai.steamstatic.com/steamcommunity/public/images/items/1465660/6f0c3c0d89b37e1d0fbdd805f114eb359dc0e539.webm"
+        type="video/webm">
+      Tu navegador no soporta el elemento de video.
+    </video>
+  </div>
+
+  <!-- Encabezado de la página con navegación -->
+  <header>
+    <h1>Paquetes de Venta</h1>
+    <nav>
+      <div class="tabs">
+        <a href="main.html" class="tab">Inicio</a>
+        <a href="ventas.html" class="tab active">Ventas</a>
+        <a id="profileLink" href="login.html" class="tab">Iniciar sesión</a>
+        <a id="logoutLink" href="#" class="tab" style="display: none;">Cerrar sesión</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Contenedor principal para los paquetes de venta -->
+  <div class="container">
+    <h3>Elige tu paquete</h3>
+    <div class="packages-grid">
+      <!-- Paquete Básico -->
+      <div class="package">
+        <img src="Imagenes/Basic.png" alt="Básico" class="package-image">
+        <h4>Básico (1 Hora)</h4>
+        <p>Acceso estándar a las instalaciones.</p>
+        <p>Ideal para una visita corta.</p>
+        <p>Precio: $10</p>
+        <button class="btn" onclick="checkUserLoggedIn('basic')">Comprar</button>
+      </div>
+
+      <!-- Paquete Intermedio -->
+      <div class="package">
+        <img src="Imagenes/Intermedium.png" alt="Intermedio" class="package-image">
+        <h4>Intermedio (3 Horas)</h4>
+        <p>Acceso completo a todas las áreas.</p>
+        <p>Un refresco gratis.</p>
+        <p>Perfecto para una visita más extensa.</p>
+        <p>Precio: $25</p>
+        <button class="btn" onclick="checkUserLoggedIn('intermediate')">Comprar</button>
+      </div>
+
+      <!-- Paquete Avanzado -->
+      <div class="package">
+        <img src="Imagenes/Advandced.png" alt="Avanzado" class="package-image">
+        <h4>Avanzado (6 Horas)</h4>
+        <p>Acceso completo a todas las áreas.</p>
+        <p>Dos refrescos gratis.</p>
+        <p>Una guía personalizada durante la visita.</p>
+        <p>Ideal para explorar con calma.</p>
+        <p>Precio: $40</p>
+        <button class="btn" onclick="checkUserLoggedIn('advanced')">Comprar</button>
+      </div>
+
+      <!-- Paquete Premium -->
+      <div class="package">
+        <img src="Imagenes/premium.png" alt="Premium" class="package-image">
+        <h4>Premium (10 Horas)</h4>
+        <p>Acceso VIP a todas las áreas.</p>
+        <p>Acceso prioritario y sin filas.</p>
+        <p>Cuatro refrescos gratis.</p>
+        <p>Un almuerzo gratis en la cafetería.</p>
+        <p>Guía personalizada y asistencia durante toda la visita.</p>
+        <p>Mejor opción para una experiencia completa.</p>
+        <p>Precio: $60</p>
+        <button class="btn" onclick="checkUserLoggedIn('premium')">Comprar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pie de página -->
+  <footer class="footer-section">
+    <div class="footer-info">
+      <p>Erick Carlos Omar Tut</p>
+      <p>5to Bachillerato en Computación - Gamma</p>
+    </div>
+    <div class="footer-info">
+      <p>Programación II</p>
+      <p>Helmut Icó</p>
+    </div>
+    <div class="footer-image">
+      <img src="Imagenes/Bressa.png" alt="Bressani">
+    </div>
+  </footer>
+
+  <!-- Script para manejar la visibilidad del perfil y el cierre de sesión -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const profileLink = document.getElementById('profileLink');
+      const logoutLink = document.getElementById('logoutLink');
+      const currentUser = localStorage.getItem('currentUser');
+
+      if (currentUser) {
+        profileLink.textContent = 'Perfil';
+        profileLink.href = 'perfil.html';
+        logoutLink.style.display = 'inline';
+        logoutLink.addEventListener('click', function () {
+          localStorage.removeItem('currentUser');
+          window.location.href = 'main.html';
+        });
+      } else {
+        logoutLink.style.display = 'none';
+      }
+    });
+
+    function checkUserLoggedIn(package) {
+      const currentUser = localStorage.getItem('currentUser');
+      if (!currentUser) {
+        alert('Ingresa primero para poder comprar');
+        window.location.href = 'login.html';
+      } else {
+        window.location.href = `pago.html?package=${package}`;
+      }
+    }
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Bosque de Arce</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+</head>
+
+<body>
+  <div class="video-background">
+    <video autoplay muted loop>
+      <!-- Fondo de video para una experiencia inmersiva -->
+      <source
+        src="https://cdn.akamai.steamstatic.com/steamcommunity/public/images/items/1465660/6f0c3c0d89b37e1d0fbdd805f114eb359dc0e539.webm"
+        type="video/webm">
+      Tu navegador no soporta el elemento de video.
+    </video>
+  </div>
+
+  <header>
+    <h1>El Bosque de Arce</h1>
+    <nav>
+      <div class="tabs">
+        <!-- Navegación entre páginas principales del sitio -->
+        <a href="main.html" class="tab active">Inicio</a>
+        <a href="redirigiendo2.html?redirect=ventas.html" class="tab">Ventas</a>
+        <a id="profileLink" href="login.html" class="tab">Iniciar sesión</a>
+        <a id="logoutLink" href="#" class="tab" style="display: none;">Cerrar sesión</a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Historia del Bosque de Arce en Jalisco</h2>
+    <p>El Bosque de Arce en Jalisco es un rincón único de México, conocido por su belleza natural y su diversidad de
+      especies. Ubicado en la región montañosa de Talpa de Allende, este bosque ofrece un paisaje espectacular durante
+      el otoño, cuando las hojas de los arces se transforman en tonos vibrantes de rojo, naranja y amarillo.</p>
+    <p>Este bosque no solo destaca por su impresionante follaje, sino también por su rica biodiversidad. Los arces
+      coexisten con una variedad de árboles boreales y tropicales, como oyameles, pinos y magnolias. Además, el bosque
+      actúa como un corredor biológico para especies como el jaguar, el puma y la guacamaya verde.</p>
+    <div class="image-container">
+      <!-- Imagen que muestra el paisaje del bosque -->
+      <img src="Imagenes/Bosque de arces Pexels.jpg" alt="Bosque">
+    </div>
+    <h2>Explorando el Bosque de Arce</h2>
+    <p>El Bosque de Arce, oficialmente conocido como el Parque Estatal Bosque de Arce, se encuentra a unos 16 kilómetros
+      de Talpa de Allende. Este lugar ofrece una experiencia inolvidable para quienes buscan conectar con la naturaleza
+      en un entorno tranquilo y pintoresco. Los visitantes pueden disfrutar de senderos que atraviesan el bosque y
+      ofrecen vistas panorámicas de los colores del otoño.</p>
+    <div class="image-container">
+      <!-- Imagen del mapa que guía a los visitantes -->
+      <img src="Imagenes/mapa.jpg" alt="Mapa">
+    </div>
+  </div>
+
+  <div class="container">
+    <h4>Caja de Comentarios</h4>
+    <!-- Formulario para enviar comentarios -->
+    <form id="myForm">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" class="input-field" placeholder="Ingresa tu nombre" required>
+
+      <label for="correo">Correo Electrónico:</label>
+      <input type="email" id="correo" name="correo" class="input-field" placeholder="Ingresa tu correo" required>
+
+      <label for="mensaje">Mensaje:</label>
+      <textarea id="mensaje" name="mensaje" class="input-field" placeholder="Escribe tu mensaje aquí"
+        required></textarea>
+
+      <button type="submit" class="btn">Enviar</button>
+    </form>
+  </div>
+
+  <script src="formulario.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const profileLink = document.getElementById('profileLink');
+      const logoutLink = document.getElementById('logoutLink');
+      const currentUser = localStorage.getItem('currentUser');
+
+      if (currentUser) {
+        // Cambia el enlace de inicio de sesión a perfil si el usuario está autenticado
+        profileLink.textContent = 'Perfil';
+        profileLink.href = 'perfil.html';
+        logoutLink.style.display = 'inline';
+        logoutLink.addEventListener('click', function () {
+          // Maneja el cierre de sesión eliminando al usuario actual del almacenamiento local
+          localStorage.removeItem('currentUser');
+          window.location.href = 'main.html';
+        });
+      } else {
+        logoutLink.style.display = 'none';
+      }
+    });
+  </script>
+
+  <div class="footer-section">
+    <div class="footer-info">
+      <p>Erick Carlos Omar Tut</p>
+      <p>5to Bachillerato en Computación - Gamma</p>
+    </div>
+    <div class="footer-info">
+      <p>Programación II</p>
+      <p>Helmut Icó</p>
+    </div>
+    <div class="footer-image">
+      <img src="Imagenes/Bressa.png" alt="Bressani">
+    </div>
+  </div>
+
+</body>
+
+</html>

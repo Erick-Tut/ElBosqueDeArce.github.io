@@ -1,0 +1,413 @@
+/* Estilos generales para todo el sitio */
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Estilos del video de fondo */
+.video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Estilo general del contenedor del formulario de pago */
+.container {
+  display: block; /* Asegúrate de que el contenedor de pago esté visible */
+  text-align: center;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  margin: 20px;
+}
+
+.no-account-message {
+  display: none;
+}
+
+/* Estilos del encabezado */
+header {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+}
+
+header h1 {
+  font-size: 2.5em;
+  margin: 0;
+}
+
+/* Estilos de navegación */
+.nav {
+  display: flex;
+  justify-content: center;
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  list-style: none;
+  margin: 0;
+}
+
+.tab {
+  color: #fff;
+  display: flex;
+  text-decoration: none;
+  padding: 10px 15px;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.tab.active {
+  background-color: #ffa500;
+  color: #000;
+}
+
+.tab:hover {
+  background-color: #e59400;
+}
+
+/* Estilos para los textos y botones */
+.container h4 {
+  font-size: 2em;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  color: #ffa500;
+}
+
+h5 {
+  font-size: 1.2em;
+  font-family: "Poppins", sans-serif;
+  margin: 10px 0;
+}
+
+.input-field {
+  width: 80%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+}
+
+.input-field::placeholder {
+  color: #ccc;
+}
+
+.password-container {
+  position: relative;
+  width: 100%;
+}
+
+.password-container .input-field {
+  width: 100%;
+  padding-right: 40px;
+}
+
+.password-container i {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #fff;
+}
+
+.btn {
+  padding: 10px 20px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ffa500;
+  color: #000;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #e59400;
+}
+
+/* Estilos del formulario */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+form h3 {
+  font-size: 1.8em;
+  font-family: "Poppins", sans-serif;
+  color: #ffa500;
+  margin-bottom: 20px;
+}
+
+form label {
+  font-size: 1.2em;
+  margin: 10px 0;
+}
+
+form input[type="text"],
+form textarea {
+  width: 80%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+}
+
+form textarea {
+  resize: vertical;
+}
+
+form input[type="text"]::placeholder,
+form textarea::placeholder {
+  color: #ccc;
+}
+
+form button {
+  padding: 10px 20px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ffa500;
+  color: #000;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #e59400;
+}
+
+/* Estilos del footer */
+.footer-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 30px;
+  position: relative;
+  height: 150px;
+}
+
+.footer-info {
+  flex: 3;
+  padding: 10px;
+}
+
+.footer-info p {
+  margin: 5px 0;
+  font-size: 1.2em;
+}
+
+.footer-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.footer-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 1em;
+  margin-top: auto; /* Asegura que el pie de página esté pegado al fondo */
+  flex-shrink: 0; /* Evita que el pie de página se reduzca de tamaño */
+}
+
+/* Estilos para imágenes */
+.image-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.image-container img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Estilos del loader */
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #ffa500;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Estilos para labels de tamaño uniforme */
+.labels-2 {
+  font-size: 1.2em;
+  font-family: "Poppins", sans-serif;
+  margin: 10px 0;
+  color: #ffa500; /* Dorado */
+}
+
+.input-field2 {
+  width: 80%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+}
+
+.input-field2::placeholder {
+  color: #ccc;
+}
+
+/* Estilos para el enlace de iniciar sesión */
+.register-link {
+  color: #ffa500;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.register-link:hover {
+  text-decoration: underline;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  font-size: 1em;
+}
+
+.no-account-message {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 2em;
+  text-align: center;
+  border-radius: 10px;
+  margin: 2em auto;
+  max-width: 400px;
+}
+
+.no-account-message h3 {
+  margin-top: 0;
+}
+
+/* Estilos del contenedor de notificaciones */
+.container-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none; /* Inicialmente oculto */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Asegura que esté encima de otros elementos */
+}
+
+.notification-box {
+  background: #252222c9;
+  border: 2px solid #333;
+  border-radius: 8px;
+  padding: 20px;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.rating-form {
+  display: none; /* Oculto inicialmente */
+}
+
+/* Estilos para las estrellas */
+.rating-stars {
+  display: flex;
+}
+
+.rating-stars .star {
+  font-size: 2rem;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.rating-stars .star.selected {
+  color: #f39c12;
+}
+
+.rating-stars .star.hover {
+  color: #f39c12;
+}
+/* Estilos para el menú de navegación del contenido */
+.content-menu {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.content-menu a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  display: block;
+}
+
+.content-menu a:hover {
+  background-color: #e59400;
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar sesión - El Bosque de Arce</title>
+  <!-- Enlace al archivo CSS para estilos -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Contenedor para el video de fondo -->
+  <div class="video-background">
+    <video autoplay muted loop>
+      <!-- Video de fondo -->
+      <source
+        src="https://cdn.akamai.steamstatic.com/steamcommunity/public/images/items/1465660/6f0c3c0d89b37e1d0fbdd805f114eb359dc0e539.webm"
+        type="video/mp4">
+      Tu navegador no soporta el elemento de video.
+    </video>
+  </div>
+
+  <header>
+    <h1>Iniciar sesión</h1>
+    <!-- Navegación con pestañas -->
+    <nav>
+      <div class="tabs">
+        <a href="main.html" class="tab">Inicio</a>
+        <a href="ventas.html" class="tab">Ventas</a>
+        <a href="login.html" class="tab active">Iniciar sesión</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Contenedor principal para el formulario de inicio de sesión -->
+  <div class="container">
+    <h3>Accede a tu cuenta</h3>
+    <form id="loginForm">
+      <div class="form-group">
+        <!-- Campo de entrada para el nombre de usuario -->
+        <label for="username" class="labels-2">Nombre de usuario:</label>
+        <input type="text" id="loginUsername" name="username" class="input-field2"
+          placeholder="Ingresa tu nombre de usuario" required>
+      </div>
+
+      <div class="form-group">
+        <!-- Campo de entrada para la contraseña -->
+        <label for="password" class="labels-2">Contraseña:</label>
+        <input type="password" id="loginPassword" name="password" class="input-field2"
+          placeholder="Ingresa tu contraseña" required>
+      </div>
+
+      <div class="form-group">
+        <!-- Opción para recordar al usuario -->
+        <input type="checkbox" id="rememberMe" name="rememberMe">
+        <label for="rememberMe" class="labels-2">Recordarme</label>
+      </div>
+
+      <!-- Botón para enviar el formulario -->
+      <button type="submit" class="btn">Iniciar sesión</button>
+    </form>
+
+    <div class="form-footer">
+      <!-- Enlace para registrarse si el usuario no tiene cuenta -->
+      <p>¿No tienes una cuenta? <a href="usuario.html" class="register-link">Regístrate aquí</a></p>
+    </div>
+  </div>
+
+  <!-- Información adicional y pie de página -->
+  <div class="footer-section">
+    <div class="footer-info">
+      <p>Erick Carlos Omar Tut</p>
+      <p>5to Bachillerato en Computación - Gamma</p>
+    </div>
+    <div class="footer-info">
+      <p>Programación II</p>
+      <p>Helmut Icó</p>
+    </div>
+    <div class="footer-image">
+      <img src="Imagenes/Bressa.png" alt="Bressani">
+    </div>
+  </div>
+  <!-- Enlace al archivo JavaScript para manejar el formulario de login -->
+  <script src="login.js"></script>
+</body>
+
+</html>

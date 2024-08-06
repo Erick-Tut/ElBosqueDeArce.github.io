@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil - El Bosque de Arce</title>
+  <link rel="stylesheet" href="style3.css"> <!-- Vincula la hoja de estilos -->
+</head>
+
+<body>
+  <!-- Video de fondo que se reproduce en bucle -->
+  <div class="video-background">
+    <video autoplay muted loop>
+      <source
+        src="https://cdn.akamai.steamstatic.com/steamcommunity/public/images/items/1465660/6f0c3c0d89b37e1d0fbdd805f114eb359dc0e539.webm"
+        type="video/webm">
+      Tu navegador no soporta el elemento de video.
+    </video>
+  </div>
+
+  <!-- Encabezado con título y navegación -->
+  <header>
+    <h1>Perfil - El Bosque de Arce</h1>
+    <nav>
+      <div class="tabs">
+        <a href="main.html" class="tab">Inicio</a>
+        <a href="redirigiendo2.html?redirect=ventas.html" class="tab">Ventas</a>
+        <a href="perfil.html" class="tab active">Perfil</a>
+        <a href="#" class="tab" id="logout">Cerrar sesión</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Contenedor principal de la página de perfil -->
+  <div class="container">
+    <h3>Mi Perfil</h3>
+    <div class="tab-buttons">
+      <!-- Botones para cambiar entre secciones del perfil -->
+      <button class="tab-button active" data-target="datos">Datos</button>
+      <button class="tab-button" data-target="comprobantes">Comprobantes</button>
+      <button class="tab-button" data-target="eliminar">Eliminar Cuenta</button>
+    </div>
+
+    <div class="tab-content">
+      <!-- Sección de datos del perfil -->
+      <div id="datos" class="tab-section active">
+        <h4>Datos</h4>
+        <p><strong>Nombre de Usuario:</strong> <span id="profileUsername"></span></p>
+        <p><strong>Contraseña:</strong> <span id="profilePassword"></span></p>
+      </div>
+      <!-- Sección de comprobantes -->
+      <div id="comprobantes" class="tab-section">
+        <h4>Comprobantes</h4>
+        <div id="tickets-list">
+          <p>No hay comprobantes.</p>
+        </div>
+        <h5>Contador Global de Compras: <span id="global-counter">001</span></h5>
+      </div>
+      <!-- Sección para eliminar la cuenta -->
+      <div id="eliminar" class="tab-section">
+        <h4>Eliminar Cuenta</h4>
+        <p>¿Estás seguro de que deseas eliminar tu cuenta?</p>
+        <button id="deleteAccount">Eliminar Cuenta</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pie de página con información del autor y la institución -->
+  <footer class="footer-section">
+    <div class="footer-info">
+      <p>Erick Carlos Omar Tut</p>
+      <p>5to Bachillerato en Computación - Gamma</p>
+    </div>
+    <div class="footer-info">
+      <p>Programación II</p>
+      <p>Helmut Icó</p>
+    </div>
+    <div class="footer-image">
+      <img src="Imagenes/Bressa.png" alt="Bressani">
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Obtiene la información del usuario desde localStorage
+      const currentUser = localStorage.getItem('currentUser');
+      const globalCounterKey = 'globalCounter'; // clave para el contador global
+      let globalCounter = parseInt(localStorage.getItem(globalCounterKey), 10) || 1;
+
+      // Si hay un usuario conectado
+      if (currentUser) {
+        const user = JSON.parse(currentUser);
+        // Muestra la información del usuario en el perfil
+        document.getElementById('profileUsername').textContent = user.username;
+        document.getElementById('profilePassword').textContent = user.password;
+
+        // Muestra los comprobantes (tickets) del usuario
+        const tickets = user.tickets || [];
+        const ticketsList = document.getElementById('tickets-list');
+        ticketsList.innerHTML = tickets.length > 0
+          ? tickets.map(ticket => `
+          <div class="ticket">
+            <img src="${ticket.image}" alt="${ticket.type}" class="ticket-image">
+            <p>Tipo: ${ticket.type} - Ticket ID: ${ticket.id}</p>
+          </div>
+        `).join('')
+          : '<p>No hay comprobantes.</p>';
+
+        // Actualiza el contador global en el perfil
+        document.getElementById('global-counter').textContent = globalCounter.toString().padStart(3, '0');
+      } else {
+        // Redirige a la página de inicio de sesión si no hay usuario conectado
+        window.location.href = 'login.html';
+      }
+
+      // Maneja el clic en el enlace de cerrar sesión
+      document.getElementById('logout').addEventListener('click', function () {
+        localStorage.removeItem('currentUser');
+        window.location.href = 'login.html'; // Redirige a login después de cerrar sesión
+      });
+
+      // Maneja el clic en el botón para eliminar la cuenta
+      document.getElementById('deleteAccount').addEventListener('click', function () {
+        if (confirm('¿Estás seguro de que deseas eliminar tu cuenta?')) {
+          // Elimina los datos del usuario de localStorage
+          const users = JSON.parse(localStorage.getItem('users')) || [];
+          const currentUsername = JSON.parse(localStorage.getItem('currentUser')).username;
+
+          // Filtra y elimina el usuario actual de la lista
+          const updatedUsers = users.filter(user => user.username !== currentUsername);
+          localStorage.setItem('users', JSON.stringify(updatedUsers));
+          localStorage.removeItem('currentUser');
+          localStorage.removeItem('globalCounter');
+
+          // Redirige a la página de inicio después de eliminar la cuenta
+          window.location.href = 'main.html';
+        }
+      });
+
+      // Maneja el cambio entre las diferentes secciones del perfil
+      const tabButtons = document.querySelectorAll('.tab-button');
+      const tabSections = document.querySelectorAll('.tab-section');
+
+      tabButtons.forEach(button => {
+        button.addEventListener('click', function () {
+          tabButtons.forEach(btn => btn.classList.remove('active'));
+          tabSections.forEach(section => section.classList.remove('active'));
+
+          this.classList.add('active');
+          const targetId = this.getAttribute('data-target');
+          document.getElementById(targetId).classList.add('active');
+        });
+      });
+    });
+  </script>
+
+</body>
+
+</html>
