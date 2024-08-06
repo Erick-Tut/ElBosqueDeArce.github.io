@@ -168,12 +168,13 @@
         const quantity = parseInt(document.getElementById('ticket-quantity').value);
         const ticketType = document.getElementById('ticket-type').value;
 
-        const ticketImages = {
+       const ticketImages = {
           'Básico': 'Imagenes/Basic.png',
           'Intermedio': 'Imagenes/Intermedium.png',
-          'Avanzado': 'Imagenes/Advandced.png',
-          'Premium': 'Imagenes/premium.png'
+          'Avanzado': 'Imagenes/advanced.png',
+          'Premium': 'Imagenes/Premium.png'
         };
+
 
         const user = JSON.parse(currentUser);
         let userTickets = user.tickets || [];
